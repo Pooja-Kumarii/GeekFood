@@ -29,6 +29,84 @@ const tagColors = {
   Popular: "#8b5cf6",
 };
 
+const quotes = [
+  {
+    quote: "One cannot think well, love well, sleep well, if one has not dined well.",
+    author: "Virginia Woolf"
+  },
+  {
+    quote: "Food is symbolic of love when words are inadequate.",
+    author: "Alan D. Wolfelt"
+  },
+  {
+    quote: "The only way to get through life is to laugh your way through it. You either have to laugh or cry. I prefer to laugh. Crying gives me a headache.",
+    author: "Marjorie Pay Hinckley"
+  },
+  {
+    quote: "Cooking is like love. It should be entered into with abandon or not at all.",
+    author: "Harriet Van Horne"
+  },
+  {
+    quote: "Food brings people together on many different levels. It's nourishment of the soul and body; it's truly love.",
+    author: "Giada De Laurentiis"
+  },
+  {
+    quote: "The discovery of a new dish does more for the happiness of mankind than the discovery of a new star.",
+    author: "Anthelme Brillat-Savarin"
+  },
+  {
+    quote: "Good food is the foundation of genuine happiness.",
+    author: "Auguste Escoffier"
+  },
+  {
+    quote: "Cooking is at once child's play and adult joy. And cooking done with care is an act of love.",
+    author: "Craig Claiborne"
+  }
+];
+
+function QuoteCard({ quote, author }) {
+  return (
+    <div className="card" style={{
+      background: "#111",
+      border: "1px solid #1e1e1e",
+      borderRadius: 20,
+      padding: "32px 28px",
+      position: "relative",
+      overflow: "hidden"
+    }}>
+      <div style={{
+        position: "absolute",
+        top: 20,
+        left: 20,
+        fontSize: 60,
+        opacity: 0.1,
+        color: "#f0472a"
+      }}>"</div>
+      <blockquote style={{
+        fontSize: 16,
+        lineHeight: 1.7,
+        color: "#f0ede8",
+        fontStyle: "italic",
+        marginBottom: 20,
+        position: "relative",
+        zIndex: 1
+      }}>
+        {quote}
+      </blockquote>
+      <cite style={{
+        fontSize: 14,
+        fontWeight: 700,
+        color: "#f0472a",
+        fontFamily: "'Space Mono', monospace",
+        display: "block",
+        textAlign: "right"
+      }}>
+        — {author}
+      </cite>
+    </div>
+  );
+}
+
 export default function GeekFoods() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [cart, setCart] = useState([]);
@@ -135,7 +213,7 @@ export default function GeekFoods() {
         </div>
 
         <div style={{ display: "flex", gap: 36, alignItems: "center" }} className="desktop-nav">
-          {["home", "menu", "features", "footer"].map((s) => (
+          {["home", "menu", "quotes", "features", "footer"].map((s) => (
             <button key={s} className="nav-link" onClick={() => scrollTo(s)}>{s === "footer" ? "contact" : s}</button>
           ))}
         </div>
@@ -219,6 +297,22 @@ export default function GeekFoods() {
                 <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10, letterSpacing: "-0.02em" }}>{f.title}</h3>
                 <p style={{ fontSize: 14, color: "#706a60", lineHeight: 1.7, fontFamily: "'Space Mono', monospace" }}>{f.desc}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* QUOTES */}
+      <section id="quotes" style={{ padding: "100px 5%", background: "#0a0a0a" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ marginBottom: 64, textAlign: "center" }}>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: "#f0472a", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>// food wisdom</div>
+            <h2 style={{ fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.1 }}>Inspiring quotes from<br />culinary legends.</h2>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 32 }}>
+            {quotes.map((quote, i) => (
+              <QuoteCard key={i} quote={quote.quote} author={quote.author} />
             ))}
           </div>
         </div>
